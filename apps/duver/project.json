@@ -1,27 +1,22 @@
 {
   "name": "duver",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "app",
-  "sourceRoot": "apps/duver/src",
+  "prefix": "duver",
+  "sourceRoot": "./src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/duver",
+        "outputPath": "dist/duver",
         "index": "apps/duver/src/index.html",
-        "browser": "apps/duver/src/main.ts",
+        "main": "apps/duver/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/duver/tsconfig.app.json",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/duver/public"
-          }
-        ],
-        "styles": ["apps/duver/src/styles.css"],
+        "assets": ["./src/favicon.ico", "./src/assets"],
+        "styles": [],
         "scripts": []
       },
       "configurations": {
@@ -41,21 +36,27 @@
           "outputHashing": "all"
         },
         "development": {
+          "buildOptimizer": false,
           "optimization": false,
+          "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 8080
+      },
       "configurations": {
         "production": {
-          "buildTarget": "duver:build:production"
+          "browserTarget": "duver:build:production"
         },
         "development": {
-          "buildTarget": "duver:build:development"
+          "browserTarget": "duver:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -63,17 +64,34 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "duver:build"
+        "browserTarget": "duver:build"
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["./src/**/*.ts", "./src/**/*.html"]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": ["{workspaceRoot}/coverage/{projectName}"],
       "options": {
-        "jestConfig": "apps/duver/jest.config.ts"
+        "jestConfig": "jest.config.app.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "duver:build"
       }
     }
   }

@@ -1,0 +1,27 @@
+.container{
+    width: 25%;
+    height: 15%;
+}
+.btn-submit{
+    background-color: grey;
+    color: white;
+    touch-action: manipulation;
+    border: 0px;
+    border-radius: 10px;
+    height:50px; 
+    width:100px; 
+    
+}
+.btn-submit:active{
+    background-color: green 
+}
+.button-div{
+   transition-delay: 1s ;
+    margin: -20px -50px; 
+    position:relative;
+    top:50%; 
+    left:50%;
+}
+.form-control{
+    border-radius: 10px;
+}

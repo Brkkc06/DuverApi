@@ -1,0 +1,80 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <select class="form-select" [(ngModel)]="selectedPerson">
+        <option *ngFor="let person of persons" [ngValue]="person">{{person}}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select" [(ngModel)]="selectedItem" (change)="onItemSelect()">
+        <option *ngFor="let item of items" [ngValue]="item">{{item.name}}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <input type="number" class="form-control" [(ngModel)]="quantity" placeholder="Quantity" min="1">
+    </div>
+    <div class="col-md-3">
+      <div class="d-flex">
+        <button class="btn btn-primary me-2" (click)="addItem()">Add to Order</button>
+        <button class="btn btn-success" (click)="saveDB()">Save DB</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h3>Order Summary</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let person of summaryByPerson">
+          <ng-container *ngFor="let order of person.orders; let i = index">
+            <tr>
+              <td *ngIf="i === 0" [attr.rowspan]="person.orders.length">{{person.person}}</td>
+              <td>{{order.name}}</td>
+              <td>{{order.quantity}} {{order.name === 'Tatlı' && order.quantity % 4 === 0 ? '(Porsiyon)' : ''}}</td>
+              <td>{{order.price | number:'1.2-2'}} TRY</td>
+              <td>
+                <button class="btn btn-warning btn-sm me-2" (click)="decreaseQuantity(person.person, order.name)">-</button>
+                <button class="btn btn-danger btn-sm" (click)="removeItem(person.person, order.name)">X</button>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3"></td>
+          <td><strong class="total-price">Total Price: {{totalPrice | number:'1.2-2'}} TRY</strong></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    <button class="btn btn-danger" (click)="resetOrder()">Reset</button>
+  </div>
+
+  <div class="mt-4">
+    <h3>Order Totals by Person</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let personTotal of personTotals">
+          <td>{{personTotal.person}}</td>
+          <td>{{personTotal.totalPrice | number:'1.2-2'}} TRY</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
