@@ -17,51 +17,74 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     return this.http.post<any>('http://localhost:3000/users/register', user, { headers: headers })
-      .pipe(tap((response) => console.log('response from backend',response)));
+      .pipe(tap((response) => console.log('response from backend:registerUser', response)));
   }
 
   getUsers() {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     return this.http.get<any>('http://localhost:3000/users/getUsers', { headers: headers })
-      .pipe(tap((response) => console.log('response from backend',response)));
+      .pipe(tap((response) => console.log('response from backend:getUsers', response)));
+  }
+  getUserInStatistic() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    return this.http.get<any>('http://localhost:3000/statistic/getUserInStatistic', { headers: headers })
+      .pipe(tap((response) => console.log('response from backend : getUserInStatistic', response)));
   }
 
-  authenticateUser(user:any){
+  authenticateUser(user: any) {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     return this.http.post<any>('http://localhost:3000/users/authenticate', user, { headers: headers })
       .pipe(
         tap((response) => console.log(response)));
   }
-  getProfile(){
+  getProfile() {
     this.loadToken();
-    let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',this.authToken);
-    return this.http.get<any>('http://localhost:3000/users/profile',  { headers: headers })
+    let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', this.authToken);
+    return this.http.get<any>('http://localhost:3000/users/profile', { headers: headers })
       .pipe(
         tap((response) => console.log(response)));
   }
 
-  loadToken(){
+  loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
 
-  loggedIn(){
+  loggedIn() {
     this.loadToken();
     const helper = new JwtHelperService();
     const isExpired = helper.isTokenExpired(localStorage.getItem('id_token'));
     return isExpired;
   }
-  storeUserData(token:any, user:any){
-    localStorage.setItem('id_token',token);
-    localStorage.setItem('user',JSON.stringify(user));
+  storeUserData(token: any, user: any) {
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user
   }
-  logout(){
-    this.authToken=null;
+  logout() {
+    this.authToken = null;
     this.user = null;
     localStorage.clear();
+  }
+  matchIds() {
+    let localName;
+    let statisticName;
+    this.getProfile().subscribe((profile) => {
+      localName = profile.user.name
+      console.log(localName);
+      this.getUserInStatistic().subscribe(data => {
+        const statisticUser = data.usersInStatistic;
+        statisticUser.forEach((element:any) => {
+          statisticName = element.name;
+          console.log(statisticName)
+        });
+        
+      });
+    });
+
   }
 }

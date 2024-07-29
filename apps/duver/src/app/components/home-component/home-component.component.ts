@@ -38,7 +38,7 @@ export class HomeComponentComponent implements OnInit {
        users.forEach((user:any) => {
         let usersName = user.name;
         this.persons.push(usersName)
-        // console.log(user._id)
+        
        });
       }
     }});

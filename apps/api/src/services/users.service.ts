@@ -35,7 +35,6 @@ export const comparePassword = async(candidatePassword,hash) => {
 }
 export const getUsers = async () => {
     return UserModel.find().then(users => {
-        console.log(users)
         return users;
     }).catch(err => console.log("getUsers ERROR ! ",err))
 }

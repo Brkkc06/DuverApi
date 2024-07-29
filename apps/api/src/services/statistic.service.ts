@@ -9,3 +9,10 @@ export const getUserByName = async (name) => {
         throw err; // Hatanın üst katmana iletilmesini sağlar
     }
 };
+
+export const  getUserInStatistic = async () => {
+ return StatisticModel.find().then(users => {
+    
+    return users;
+ }).catch(err => console.log('ERROR getUserInStatistic',err));
+} 

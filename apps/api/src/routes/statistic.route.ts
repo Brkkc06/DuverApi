@@ -1,5 +1,6 @@
 import express from 'express';
 import { StatisticModel } from '../schemas/statistic.schema'; // Model importu
+import { getUserInStatistic } from '../services/statistic.service';
 const router = express.Router();
 
 router.post('/save', async (req, res) => {
@@ -42,7 +43,7 @@ router.post('/save', async (req, res) => {
                 user.food.bahsis = (user.food.bahsis || 0) + (food.bahsis || 0);
 
                 await user.save();
-                console.log('User updated:', user);
+                console.log('User updated:');
             } else {
                 user = new StatisticModel({
                     name,
@@ -60,5 +61,17 @@ router.post('/save', async (req, res) => {
         return res.status(500).json({ success: false, msg: 'An error occurred', error: err.message });
     }
 });
+
+router.get('/getUserInStatistic', async (req,res) => {
+    const usersInStatistic = await getUserInStatistic();
+    if(usersInStatistic) {
+        return res.json({success:true,msg:'Users in Statistic :',usersInStatistic})
+    }
+    else{
+        return res.json({success:false,msg:'ERROR in User in Statistic, Check get.getUserInStatistic'})
+    }
+})
+
+
 
 export default router;
