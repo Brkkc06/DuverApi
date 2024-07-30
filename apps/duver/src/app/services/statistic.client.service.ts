@@ -15,4 +15,10 @@ export class statisticService {
         return this.http.get<any>('http://localhost:3000/statistic/getUserInStatistic', { headers: headers })
           .pipe(tap((response) => console.log('response from backend : getUserInStatistic', response)));
       }
+     getStatistic(){
+      let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json');
+        return this.http.get<any>('http://localhost:3000/statistic/getStatistic', { headers: headers })
+          .pipe(tap((response) => console.log('response from backend : getStatistic', response)));
+     } 
 }

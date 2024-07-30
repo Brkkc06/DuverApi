@@ -15,8 +15,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
-import { statisticService } from './services/statistic.service';
+import { UserService } from './services/users.client.service';
+import { statisticService } from './services/statistic.client.service';
 
 
 @NgModule({

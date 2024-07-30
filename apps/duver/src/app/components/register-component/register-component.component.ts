@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/users.client.service';
 
 @Component({
   selector: 'website-register-component',
