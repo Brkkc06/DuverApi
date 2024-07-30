@@ -15,6 +15,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { statisticService } from './services/statistic.service';
 
 
 @NgModule({
@@ -33,7 +35,7 @@ import { AuthService } from './services/auth.service';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [ValidateService,AuthService],
+  providers: [ValidateService,AuthService,UserService,statisticService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

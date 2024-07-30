@@ -9,29 +9,8 @@ import { JwtHelperService, JwtModule } from "@auth0/angular-jwt";
 export class AuthService {
   authToken: any;
   user: any;
-
-
+  
   constructor(private http: HttpClient) { }
-
-  registerUser(user: any) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    return this.http.post<any>('http://localhost:3000/users/register', user, { headers: headers })
-      .pipe(tap((response) => console.log('response from backend:registerUser', response)));
-  }
-
-  getUsers() {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    return this.http.get<any>('http://localhost:3000/users/getUsers', { headers: headers })
-      .pipe(tap((response) => console.log('response from backend:getUsers', response)));
-  }
-  getUserInStatistic() {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    return this.http.get<any>('http://localhost:3000/statistic/getUserInStatistic', { headers: headers })
-      .pipe(tap((response) => console.log('response from backend : getUserInStatistic', response)));
-  }
 
   authenticateUser(user: any) {
     let headers = new HttpHeaders();
@@ -70,22 +49,44 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
   }
-  matchIds() {
-    let localName;
-    let statisticName;
-    // localhost:8080/getStatisticByUserId/u123ugquywegty12y3
-    this.getProfile().subscribe((profile) => {
-      localName = profile.user.name
-      console.log(localName);
-      this.getUserInStatistic().subscribe(data => {
-        const statisticUser = data.usersInStatistic;
-        statisticUser.forEach((element:any) => {
-          statisticName = element.name;
-          console.log(statisticName)
-        });
-        
-      });
-    });
 
-  }
+  // registerUser(user: any) {
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('Content-Type', 'application/json');
+  //   return this.http.post<any>('http://localhost:3000/users/register', user, { headers: headers })
+  //     .pipe(tap((response) => console.log('response from backend:registerUser', response)));
+  // }
+
+  // getUsers() {
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('Content-Type', 'application/json');
+  //   return this.http.get<any>('http://localhost:3000/users/getUsers', { headers: headers })
+  //     .pipe(tap((response) => console.log('response from backend:getUsers', response)));
+  // }
+  // getUserInStatistic() {
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('Content-Type', 'application/json');
+  //   return this.http.get<any>('http://localhost:3000/statistic/getUserInStatistic', { headers: headers })
+  //     .pipe(tap((response) => console.log('response from backend : getUserInStatistic', response)));
+  // }
+
+
+  // matchIds() {
+  //   let localName;
+  //   let statisticName;
+  //   // localhost:8080/getStatisticByUserId/u123ugquywegty12y3
+  //   this.getProfile().subscribe((profile) => {
+  //     localName = profile.user.name
+  //     console.log(localName);
+  //     this.getUserInStatistic().subscribe(data => {
+  //       const statisticUser = data.usersInStatistic;
+  //       statisticUser.forEach((element:any) => {
+  //         statisticName = element.name;
+  //         console.log(statisticName)
+  //       });
+        
+  //     });
+  //   });
+
+  // }
 }

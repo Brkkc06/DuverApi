@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'website-register-component',
@@ -17,7 +18,8 @@ export class RegisterComponentComponent {
 
   constructor(private ValidateService:ValidateService,
     private authService:AuthService,
-    private router : Router
+    private router : Router,
+    private userService:UserService
     
   ){}
 
@@ -37,7 +39,7 @@ export class RegisterComponentComponent {
       alert('Please use a valid Email');
       return false;
     }
-    this.authService.registerUser(user).subscribe((response:any) => {
+    this.userService.registerUser(user).subscribe((response:any) => {
       console.log('response',response)
       if (response && response.success) {
         alert('Registration successful');

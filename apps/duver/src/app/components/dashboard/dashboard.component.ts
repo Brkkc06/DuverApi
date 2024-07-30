@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent {
   constructor(private authService:AuthService,private router:Router){}
-  matchIds(){
-    this.authService.matchIds();
-    console.log('calıstı');
-  }
+  // matchIds(){
+  //   this.authService.matchIds();
+  //   console.log('calıstı');
+  // }
 }

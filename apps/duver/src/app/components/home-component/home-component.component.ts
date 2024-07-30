@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home-component',
@@ -8,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./home-component.component.css']
 })
 export class HomeComponentComponent implements OnInit {
-  constructor(private http: HttpClient, private authService:AuthService) {}
+  constructor(private http: HttpClient, private authService:AuthService,private userService:UserService) {}
   persons :{id:String,name:String}[] = [];
   items = [
     { name: 'Lahmacun', price: 130 },
@@ -32,7 +33,7 @@ export class HomeComponentComponent implements OnInit {
 
   ngOnInit() {
     // Set the first person and item as selected by default
-     this.authService.getUsers().subscribe({next:data => {
+     this.userService.getUsers().subscribe({next:data => {
       if(data.success){
        const users = data.users
        users.forEach((user:any) => {
