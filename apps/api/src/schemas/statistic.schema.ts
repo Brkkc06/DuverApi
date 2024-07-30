@@ -2,6 +2,7 @@ import { model, Schema } from 'mongoose';
 
 export const StatisticSchema = new Schema({
     name: String,
+    userId :String,
     food: {
         lahmacun: { type: Number, default: 0 },
         ayran: { type: Number, default: 0 },

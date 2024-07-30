@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-3">
       <select class="form-select" [(ngModel)]="selectedPerson">
-        <option *ngFor="let person of persons" [ngValue]="person">{{person}}</option>
+        <option *ngFor="let person of persons" [ngValue]="person">{{person.name}}</option>
       </select>
     </div>
     <div class="col-md-3">
@@ -37,7 +37,7 @@
         <ng-container *ngFor="let person of summaryByPerson">
           <ng-container *ngFor="let order of person.orders; let i = index">
             <tr>
-              <td *ngIf="i === 0" [attr.rowspan]="person.orders.length">{{person.person}}</td>
+              <td *ngIf="i === 0" [attr.rowspan]="person.orders.length">{{person.person.name}}</td>
               <td>{{order.name}}</td>
               <td>{{order.quantity}} {{order.name === 'Tatlı' && order.quantity % 4 === 0 ? '(Porsiyon)' : ''}}</td>
               <td>{{order.price | number:'1.2-2'}} TRY</td>
@@ -71,7 +71,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let personTotal of personTotals">
-          <td>{{personTotal.person}}</td>
+          <td>{{personTotal.person.name}}</td>
           <td>{{personTotal.totalPrice | number:'1.2-2'}} TRY</td>
         </tr>
       </tbody>

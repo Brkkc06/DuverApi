@@ -4,17 +4,17 @@ import { getUserInStatistic } from '../services/statistic.service';
 const router = express.Router();
 
 router.post('/save', async (req, res) => {
-    const users = req.body;
-
+    const users = req.body; //statistic kısmındaki user
     try {
         for (const userData of users) {
-            const { name, food } = userData;
+            const { name,userId, food } = userData;
 
-            console.log('Processing user:', name);
-            console.log('Food data:', food);
+            console.log('Processing user:', name); // düzenlenme yapılan kullanıcı adı
+            console.log('Saved userId:', userId);
+            console.log('Food data:', food); // ekleme yapılan yemek
 
             let user = await StatisticModel.findOne({ name });
-
+            
             if (user) {
                 console.log('Existing user found:', user);
 
@@ -47,6 +47,7 @@ router.post('/save', async (req, res) => {
             } else {
                 user = new StatisticModel({
                     name,
+                    userId,
                     food
                 });
 

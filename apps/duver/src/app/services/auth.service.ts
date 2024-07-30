@@ -37,15 +37,15 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     return this.http.post<any>('http://localhost:3000/users/authenticate', user, { headers: headers })
-      .pipe(
-        tap((response) => console.log(response)));
+      // .pipe(
+      //   tap((response) => console.log(response)));
   }
   getProfile() {
     this.loadToken();
     let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', this.authToken);
     return this.http.get<any>('http://localhost:3000/users/profile', { headers: headers })
-      .pipe(
-        tap((response) => console.log(response)));
+      // .pipe(
+      //   tap((response) => console.log(response)));
   }
 
   loadToken() {
@@ -73,6 +73,7 @@ export class AuthService {
   matchIds() {
     let localName;
     let statisticName;
+    // localhost:8080/getStatisticByUserId/u123ugquywegty12y3
     this.getProfile().subscribe((profile) => {
       localName = profile.user.name
       console.log(localName);

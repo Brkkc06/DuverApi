@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HomeComponentComponent implements OnInit {
   constructor(private http: HttpClient, private authService:AuthService) {}
-  persons :string[] = [];
+  persons :{id:String,name:String}[] = [];
   items = [
     { name: 'Lahmacun', price: 130 },
     { name: 'Ayran', price: 45 },
@@ -37,9 +37,13 @@ export class HomeComponentComponent implements OnInit {
        const users = data.users
        users.forEach((user:any) => {
         let usersName = user.name;
-        this.persons.push(usersName)
-        
+        let usersId = user._id
+        this.persons.push({ id : usersId ,name:usersName})
        });
+       if(this.persons.length >0) {
+        this.selectedPerson = this.persons[0].id;
+        this.selectedItem = this.items[0];
+       }
       }
     }});
     
@@ -63,7 +67,7 @@ export class HomeComponentComponent implements OnInit {
         bahsis: personOrders.filter(o => o.name === 'Bahşiş').reduce((sum, o) => sum + o.quantity, 0)
       };
 
-      return { name: person, food };
+      return { name: person.name, userId:person.id, food };
     });
 
     this.http.post('http://localhost:3000/statistic/save', usersData)
