@@ -7,6 +7,7 @@ import { map, tap } from 'rxjs/operators';
   })
 
 export class statisticService {
+  authToken: any;
     constructor(private http: HttpClient) {}
 
     getUserInStatistic() {
@@ -15,10 +16,15 @@ export class statisticService {
         return this.http.get<any>('http://localhost:3000/statistic/getUserInStatistic', { headers: headers })
           .pipe(tap((response) => console.log('response from backend : getUserInStatistic', response)));
       }
-     getStatistic(){
-      let headers = new HttpHeaders();
-        headers = headers.set('Content-Type', 'application/json');
+      loadToken() {
+        const token = localStorage.getItem('id_token');
+        this.authToken = token;
+      }
+      getStatistic() {
+        this.loadToken();
+        let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', this.authToken);
         return this.http.get<any>('http://localhost:3000/statistic/getStatistic', { headers: headers })
-          .pipe(tap((response) => console.log('response from backend : getStatistic', response)));
-     } 
+          // .pipe(
+          //   tap((response) => console.log(response)));
+      }
 }

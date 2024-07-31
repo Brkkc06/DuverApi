@@ -1,1 +1,23 @@
-<!-- <button class="btn" (click)="matchIds()">button</button> -->
+<div class="summary">
+    <h2>{{ statistic.name }}'s Food Statistics</h2>
+    <div *ngIf="statistic">
+      <p *ngIf="statistic.food.lahmacun > 0"><strong>Lahmacun:</strong> {{ statistic.food.lahmacun }}</p>
+      <p *ngIf="statistic.food.ayran > 0"><strong>Ayran:</strong> {{ statistic.food.ayran }}</p>
+      <p *ngIf="statistic.food.tatli > 0"><strong>Tatlı:</strong> {{ statistic.food.tatli }}</p>
+      <p *ngIf="statistic.food.corba > 0"><strong>Çorba:</strong> {{ statistic.food.corba }}</p>
+      <p *ngIf="statistic.food.AntepLahmacun > 0"><strong>Antep Lahmacun:</strong> {{ statistic.food.AntepLahmacun }}</p>
+      <p *ngIf="statistic.food.su > 0"><strong>Su:</strong> {{ statistic.food.su }}</p>
+      <p *ngIf="statistic.food.Cola > 0"><strong>Cola:</strong> {{ statistic.food.Cola }}</p>
+      <p *ngIf="statistic.food.bahsis > 0"><strong>Bahşiş:</strong> {{ statistic.food.bahsis }}</p>
+    </div>
+  </div>
+  
+  <div class="chart-controls">
+    <button (click)="updateChart('daily')">Daily</button>
+    <button (click)="updateChart('weekly')">Weekly</button>
+    <button (click)="updateChart('monthly')">Monthly</button>
+    <button (click)="updateChart('yearly')">Yearly</button>
+  </div>
+  
+  <canvas id="myChart"></canvas>
+  

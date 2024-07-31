@@ -17,7 +17,7 @@
         "tsConfig": "apps/duver/tsconfig.app.json",
         "assets": ["./src/favicon.ico", "./src/assets"],
         "styles": [],
-        "scripts": []
+        "scripts": ["node_modules/chart.js/dist/chart.js"]
       },
       "configurations": {
         "production": {

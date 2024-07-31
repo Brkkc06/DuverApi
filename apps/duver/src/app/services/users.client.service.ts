@@ -21,7 +21,7 @@ export class UserService {
         let headers = new HttpHeaders();
         headers = headers.set('Content-Type', 'application/json');
         return this.http.get<any>('http://localhost:3000/users/getUsers', { headers: headers })
-            .pipe(tap((response) => console.log('response from backend:getUsers', response)));
+            // .pipe(tap((response) => console.log('response from backend:getUsers', response)));
     }
 
 

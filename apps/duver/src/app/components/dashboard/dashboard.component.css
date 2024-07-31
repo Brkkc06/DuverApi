@@ -1,0 +1,21 @@
+.summary {
+    margin-bottom: 20px;
+  }
+  
+  .chart-controls {
+    margin-bottom: 20px;
+  }
+  
+  .chart-controls button {
+    margin-right: 10px;
+  }
+  
+  canvas {
+    max-width: 100%; /* Ensure the canvas doesn't overflow its container */
+    height: 200px; /* Adjust height to make the chart smaller */
+  }
+  .chart-container {
+    height: 250px; /* Adjust height */
+    overflow: hidden; /* Hide overflow to avoid scrollbars */
+  }
+  

@@ -1,6 +1,8 @@
 import express from 'express';
 import { StatisticModel } from '../schemas/statistic.schema'; // Model importu
 import { getUserInStatistic } from '../services/statistic.service';
+import passport from 'passport';
+
 const router = express.Router();
 
 router.post('/save', async (req, res) => {
@@ -73,6 +75,16 @@ router.get('/getUserInStatistic', async (req,res) => {
     }
 })
 
+
+router.get('/getStatistic',passport.authenticate('jwt',{session:false}), async (req,res) =>{
+    const userId = (req as any).user._id
+    const statistic = await StatisticModel.findOne({userId: userId})
+    if(!statistic){
+        alert('Henüz bir istatisliğiniz  yok !')
+    }
+    const{ name , food } = statistic
+    res.json({name,food})
+})
 
 
 export default router;
