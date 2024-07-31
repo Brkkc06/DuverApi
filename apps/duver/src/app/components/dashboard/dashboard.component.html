@@ -13,11 +13,20 @@
   </div>
   
   <div class="chart-controls">
-    <button (click)="updateChart('daily')">Daily</button>
-    <button (click)="updateChart('weekly')">Weekly</button>
-    <button (click)="updateChart('monthly')">Monthly</button>
-    <button (click)="updateChart('yearly')">Yearly</button>
+    <button (click)="updateCharts('daily')">Daily</button>
+    <button (click)="updateCharts('weekly')">Weekly</button>
+    <button (click)="updateCharts('monthly')">Monthly</button>
+    <button (click)="updateCharts('yearly')">Yearly</button>
   </div>
   
-  <canvas id="myChart"></canvas>
+  <div class="charts">
+    <div class="chart-container">
+      <h3>Food Statistics</h3>
+      <canvas id="foodChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>Cost Statistics</h3>
+      <canvas id="costChart"></canvas>
+    </div>
+  </div>
   

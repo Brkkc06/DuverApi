@@ -4,18 +4,46 @@
   
   .chart-controls {
     margin-bottom: 20px;
+    text-align: center; /* Center align the buttons */
   }
   
   .chart-controls button {
-    margin-right: 10px;
+    margin: 5px; /* Adjust margin for spacing */
+    padding: 8px 12px; /* Smaller padding */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 14px; /* Smaller font size */
+    transition: background-color 0.3s ease;
+  }
+  
+  .chart-controls button:hover {
+    background-color: #0056b3;
+  }
+  
+  .charts {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .chart-container {
+    width: 48%; /* Adjust width for side-by-side layout */
   }
   
   canvas {
     max-width: 100%; /* Ensure the canvas doesn't overflow its container */
-    height: 200px; /* Adjust height to make the chart smaller */
+    height: 300px; /* Adjust height for better layout */
   }
-  .chart-container {
-    height: 250px; /* Adjust height */
-    overflow: hidden; /* Hide overflow to avoid scrollbars */
+  
+  .food-chart {
+    background-color: rgba(75, 192, 192, 1); /* Opaque background color */
+    border-color: rgba(75, 192, 192, 1);
+  }
+  
+  .cost-chart {
+    background-color: rgba(255, 99, 132, 1); /* Opaque background color */
+    border-color: rgba(255, 99, 132, 1);
   }
   
