@@ -1,8 +1,4 @@
-.summary {
-    margin-bottom: 20px;
-  }
-  
-  .chart-controls {
+.chart-controls {
     margin-bottom: 20px;
     text-align: center; /* Center align the buttons */
   }
@@ -16,7 +12,12 @@
     color: white;
     cursor: pointer;
     font-size: 14px; /* Smaller font size */
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform for active state */
+  }
+  
+  .chart-controls button.active {
+    background-color: #020911; /* Different color for the active button */
+    transform: scale(1.1); /* Slightly enlarge active button */
   }
   
   .chart-controls button:hover {
@@ -35,15 +36,5 @@
   canvas {
     max-width: 100%; /* Ensure the canvas doesn't overflow its container */
     height: 300px; /* Adjust height for better layout */
-  }
-  
-  .food-chart {
-    background-color: rgba(75, 192, 192, 1); /* Opaque background color */
-    border-color: rgba(75, 192, 192, 1);
-  }
-  
-  .cost-chart {
-    background-color: rgba(255, 99, 132, 1); /* Opaque background color */
-    border-color: rgba(255, 99, 132, 1);
   }
   

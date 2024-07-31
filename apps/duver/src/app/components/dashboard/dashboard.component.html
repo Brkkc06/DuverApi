@@ -13,10 +13,10 @@
   </div>
   
   <div class="chart-controls">
-    <button (click)="updateCharts('daily')">Daily</button>
-    <button (click)="updateCharts('weekly')">Weekly</button>
-    <button (click)="updateCharts('monthly')">Monthly</button>
-    <button (click)="updateCharts('yearly')">Yearly</button>
+    <button [ngClass]="{'active': activePeriod === 'daily'}" (click)="updateCharts('daily')">Daily</button>
+    <button [ngClass]="{'active': activePeriod === 'weekly'}" (click)="updateCharts('weekly')">Weekly</button>
+    <button [ngClass]="{'active': activePeriod === 'monthly'}" (click)="updateCharts('monthly')">Monthly</button>
+    <button [ngClass]="{'active': activePeriod === 'yearly'}" (click)="updateCharts('yearly')">Yearly</button>
   </div>
   
   <div class="charts">

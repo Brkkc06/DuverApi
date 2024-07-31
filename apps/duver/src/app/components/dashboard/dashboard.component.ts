@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit {
     { name: 'Cola', price: 55 },
     { name: 'Içli Köfte', price: 90 }
   ];
+  
+  activePeriod: 'daily' | 'weekly' | 'monthly' | 'yearly' = 'weekly'; // Default period
 
   constructor(private authService: AuthService, private router: Router, private statisticService: statisticService) { }
 
@@ -33,8 +35,8 @@ export class DashboardComponent implements OnInit {
     this.statisticService.getStatistic().subscribe(data => {
       this.statistic = data;
       console.log(this.statistic);
-      this.createFoodChart('daily'); // Default to daily view
-      this.createCostChart('daily'); // Default to daily view
+      this.createFoodChart(this.activePeriod); // Default to weekly view
+      this.createCostChart(this.activePeriod); // Default to weekly view
     });
   }
 
@@ -115,15 +117,12 @@ export class DashboardComponent implements OnInit {
   }
 
   updateCharts(period: 'daily' | 'weekly' | 'monthly' | 'yearly'): void {
+    this.activePeriod = period; // Update active period
     this.createFoodChart(period);
     this.createCostChart(period);
   }
 
   getChartData(period: 'daily' | 'weekly' | 'monthly' | 'yearly'): number[] {
-    const daysInMonth = 30; // Average days in a month
-    const daysInYear = 365; // Average days in a year
-    const weeksInYear = 52; // Weeks in a year
-
     let dailyData = [
       this.statistic.food.lahmacun,
       this.statistic.food.ayran,
@@ -137,37 +136,32 @@ export class DashboardComponent implements OnInit {
 
     let data: number[] = [];
 
-    if (period === 'daily') {
+    if (period === 'weekly') {
       data = dailyData;
-    } else if (period === 'weekly') {
-      data = dailyData.map(value => (value / 14) * 7); // Weekly data
+    } else if (period === 'daily') {
+      data = dailyData.map(value => value / 7); // Weekly data
     } else if (period === 'monthly') {
-      data = dailyData.map(value => (value / 14) * daysInMonth); // Monthly data
+      data = dailyData.map(value => value / 30); // Monthly data
     } else if (period === 'yearly') {
-      data = dailyData.map(value => (value / 14) * daysInYear); // Yearly data
+      data = dailyData.map(value => value / 365); // Yearly data
     }
 
     return data;
   }
 
   getCostData(period: 'daily' | 'weekly' | 'monthly' | 'yearly'): number[] {
-    const daysInMonth = 30; // Average days in a month
-    const daysInYear = 365; // Average days in a year
-    const weeksInYear = 52; // Weeks in a year
-
     let costData = this.prices.map(item => item.price);
-    let dailyData = this.getChartData('daily');
-
+    let chartData = this.getChartData(period);
     let cost: number[] = [];
 
     if (period === 'daily') {
-      cost = costData.map((price, index) => dailyData[index] * price);
+      cost = costData.map((price, index) => (chartData[index] * price)); // Daily cost
     } else if (period === 'weekly') {
-      cost = costData.map((price, index) => (dailyData[index] / 7) * price);
+      cost = costData.map((price, index) => (chartData[index] * price)); // Weekly cost
     } else if (period === 'monthly') {
-      cost = costData.map((price, index) => (dailyData[index] / 30) * price);
+      cost = costData.map((price, index) => (chartData[index] * price)); // Monthly cost
     } else if (period === 'yearly') {
-      cost = costData.map((price, index) => (dailyData[index] / 365) * price);
+      cost = costData.map((price, index) => (chartData[index] * price)); // Yearly cost
     }
 
     return cost;
