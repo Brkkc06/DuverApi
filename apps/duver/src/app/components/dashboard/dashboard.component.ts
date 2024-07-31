@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
         this.chartFood = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['Lahmacun', 'Ayran', 'Tatlı', 'Çorba', 'Antep Lahmacun', 'Su', 'Cola', 'Bahşiş'],
+            labels: ['Lahmacun', 'Ayran', 'Tatlı', 'Çorba', 'Antep Lahmacun', 'Içli Köfte', 'Cola', 'Bahşiş','Su'],
             datasets: [{
               label: `Food Statistics (${period.charAt(0).toUpperCase() + period.slice(1)})`,
               data: chartData,
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
         this.chartCost = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['Lahmacun', 'Ayran', 'Tatlı', 'Çorba', 'Antep Lahmacun', 'Su', 'Cola', 'Bahşiş'],
+            labels: ['Lahmacun', 'Ayran', 'Tatlı', 'Çorba', 'Antep Lahmacun', 'Içli Köfte', 'Cola', 'Bahşiş','Su'],
             datasets: [{
               label: `Cost (${period.charAt(0).toUpperCase() + period.slice(1)})`,
               data: costData,
